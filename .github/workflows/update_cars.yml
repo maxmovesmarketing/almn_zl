@@ -1,6 +1,9 @@
 name: Update cars.csv daily
 
 on:
+  push:
+    branches:
+      - master
   workflow_dispatch: # Allows manual triggering
   schedule:
     - cron: '*/5 * * * *' # Runs every 5 minutes
