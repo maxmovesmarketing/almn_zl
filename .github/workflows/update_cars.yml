@@ -1,9 +1,9 @@
 name: Update cars.csv daily
 
 on:
-  schedule:
-    - cron: '*/5 * * * *' # Runs every 5 minutes for testing
   workflow_dispatch: # Allows manual triggering
+  schedule:
+    - cron: '*/5 * * * *' # Runs every 5 minutes
 
 jobs:
   update-csv:
@@ -18,10 +18,12 @@ jobs:
           python-version: '3.x'
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
 
       - name: Run scraper
-        run: bash run_scraper.sh
+        run: |
+          bash run_scraper.sh
 
       - name: Add timestamp to CSV
         run: |
@@ -32,6 +34,6 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add cars.csv
-          git commit -m "Update cars.csv with new data and timestamp"
+          git commit -m "Update cars.csv with new data and timestamp" || echo "No changes to commit"
           git push
 
