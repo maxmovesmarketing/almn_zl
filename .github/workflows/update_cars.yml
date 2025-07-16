@@ -2,7 +2,7 @@ name: Update cars.csv daily
 
 on:
   schedule:
-    - cron: '* * * * *' # Runs every minute for testing
+    - cron: '*/5 * * * *' # Runs every 5 minutes for testing
   workflow_dispatch: # Allows manual triggering
 
 jobs:
